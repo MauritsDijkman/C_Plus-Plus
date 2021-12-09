@@ -9,14 +9,14 @@
 MainMenu::MainMenu(SceneHandler& handler, SpriteObject& background, TextObject& highscoreText1, TextObject& highscoreText2, TextObject& highscoreText3, TextObject& highscoreText4, TextObject& highscoreText5)
 {
 	handler.addScene(this->scene);
-	SetupScene(handler, background);
+	SetupScene(handler, background, highscoreText1, highscoreText2, highscoreText3, highscoreText4, highscoreText5);
 }
 
 MainMenu::~MainMenu() {}
 
 void MainMenu::SetupScene(SceneHandler& sceneHandler, SpriteObject& background, TextObject& highscoreText1, TextObject& highscoreText2, TextObject& highscoreText3, TextObject& highscoreText4, TextObject& highscoreText5) {
 	// File
-	CheckForFile("Assets/Input_Output_Files/highscores.cmgt");
+	CheckForFile("Assets/Input_Output_Files/highscores.cmgt", highscoreText1, highscoreText2, highscoreText3, highscoreText4, highscoreText5);
 
 	// Positions
 	background.setPosition(sf::Vector2f(0.0f, 0.0f));
@@ -73,8 +73,8 @@ void MainMenu::Setup_PlayButton(SceneHandler& handler, Scene& nextScene, sf::Sou
 		});
 }
 
-void MainMenu::Setup_EraseButton(sf::Sound& sound, std::string& file) {
-	eraseButton.setButtonAction([=, &sound, &file]() { // = makes sure that the action has access to all variables / methods of the class
+void MainMenu::Setup_EraseButton(sf::Sound& sound, std::string& file, TextObject& highscoreText1, TextObject& highscoreText2, TextObject& highscoreText3, TextObject& highscoreText4, TextObject& highscoreText5) {
+	eraseButton.setButtonAction([=, &sound, &file, &highscoreText1, &highscoreText2, &highscoreText3, &highscoreText4, &highscoreText5]() { // = makes sure that the action has access to all variables / methods of the class
 		sound.play();
 
 		// Opening the file with scores
@@ -92,7 +92,7 @@ void MainMenu::Setup_EraseButton(sf::Sound& sound, std::string& file) {
 			ofStream_Highscore.close();
 
 			// Update the score text
-			UpdateScore("Assets/Input_Output_Files/highscores.cmgt");
+			UpdateScore("Assets/Input_Output_Files/highscores.cmgt", highscoreText1, highscoreText2, highscoreText3, highscoreText4, highscoreText5);
 		}
 		});
 }
@@ -104,7 +104,7 @@ void MainMenu::Setup_QuitButton(sf::RenderWindow& window, sf::Sound& sound) {
 		});
 }
 
-void MainMenu::CheckForFile(std::string highscoreFile) {
+void MainMenu::CheckForFile(std::string highscoreFile, TextObject& highscoreText1, TextObject& highscoreText2, TextObject& highscoreText3, TextObject& highscoreText4, TextObject& highscoreText5) {
 	bool fileExists = false;
 
 	// Opening the file so that it can be read
@@ -131,11 +131,11 @@ void MainMenu::CheckForFile(std::string highscoreFile) {
 
 	// Sort the score if the file of the scores exists
 	if (fileExists) {
-		SortScore(highscoreFile);
+		SortScore(highscoreFile, highscoreText1, highscoreText2, highscoreText3, highscoreText4, highscoreText5);
 	}
 }
 
-void MainMenu::SortScore(std::string highscoreFile) {
+void MainMenu::SortScore(std::string highscoreFile, TextObject& highscoreText1, TextObject& highscoreText2, TextObject& highscoreText3, TextObject& highscoreText4, TextObject& highscoreText5) {
 	std::ifstream highscoreStats(highscoreFile);
 	std::vector<int> vectorScore;
 
@@ -167,10 +167,10 @@ void MainMenu::SortScore(std::string highscoreFile) {
 	phighscoreStats.close();
 
 	// Updating the score to be displayed on screen
-	UpdateScore(highscoreFile);
+	UpdateScore(highscoreFile, highscoreText1, highscoreText2, highscoreText3, highscoreText4, highscoreText5);
 }
 
-void MainMenu::UpdateScore(std::string highscoreFile) {
+void MainMenu::UpdateScore(std::string highscoreFile, TextObject& highscoreText1, TextObject& highscoreText2, TextObject& highscoreText3, TextObject& highscoreText4, TextObject& highscoreText5) {
 	// Opening the file, reading it and setting the text to that score
 	std::ifstream highscoreStats(highscoreFile);
 
@@ -183,11 +183,11 @@ void MainMenu::UpdateScore(std::string highscoreFile) {
 		score[i] = line;
 	}
 
-	//highscoreText1.setText("Highscore 1: " + score[0]);
-	//highscoreText2.setText("Highscore 2: " + score[1]);
-	//highscoreText3.setText("Highscore 3: " + score[2]);
-	//highscoreText4.setText("Highscore 4: " + score[3]);
-	//highscoreText5.setText("Highscore 5: " + score[4]);
+	highscoreText1.setText("Highscore 1: " + score[0]);
+	highscoreText2.setText("Highscore 2: " + score[1]);
+	highscoreText3.setText("Highscore 3: " + score[2]);
+	highscoreText4.setText("Highscore 4: " + score[3]);
+	highscoreText5.setText("Highscore 5: " + score[4]);
 
 	highscoreStats.close();
 }

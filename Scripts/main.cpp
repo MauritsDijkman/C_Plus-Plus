@@ -155,7 +155,7 @@ int main()
 
 
 	mainMenu.Setup_PlayButton(handler, selectMenu.scene, selectSound);
-	mainMenu.Setup_EraseButton(selectSound, highscoreFile);
+	mainMenu.Setup_EraseButton(selectSound, highscoreFile, highscoreText1, highscoreText2, highscoreText3, highscoreText4, highscoreText5);
 	mainMenu.Setup_QuitButton(window, selectSound);
 	mainMenu.Setup_YounglingButton(youngling, apprentice, master, selectSound);
 	mainMenu.Setup_ApprenticeButton(youngling, apprentice, master, selectSound);
