@@ -183,11 +183,11 @@ void MainMenu::UpdateScore(std::string highscoreFile) {
 		score[i] = line;
 	}
 
-	highscoreText1.setText("Highscore 1: " + score[0]);
-	highscoreText2.setText("Highscore 2: " + score[1]);
-	highscoreText3.setText("Highscore 3: " + score[2]);
-	highscoreText4.setText("Highscore 4: " + score[3]);
-	highscoreText5.setText("Highscore 5: " + score[4]);
+	//highscoreText1.setText("Highscore 1: " + score[0]);
+	//highscoreText2.setText("Highscore 2: " + score[1]);
+	//highscoreText3.setText("Highscore 3: " + score[2]);
+	//highscoreText4.setText("Highscore 4: " + score[3]);
+	//highscoreText5.setText("Highscore 5: " + score[4]);
 
 	highscoreStats.close();
 }
