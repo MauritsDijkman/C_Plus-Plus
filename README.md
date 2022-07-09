@@ -1,8 +1,8 @@
 # Star Wars Battles
 
 **Requirements**
-The game needs SFML-2.5.1 to run.
-Download: https://www.sfml-dev.org/download/sfml/2.5.1/
+- The game needs SFML-2.5.1 to run.
+- Download: https://www.sfml-dev.org/download/sfml/2.5.1/
 
 **Install instructions**
 - Unzip the download folder on your PC
